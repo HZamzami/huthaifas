@@ -284,7 +284,6 @@ main:focus { outline: none; }
 
 .footer {
   padding-block: 2rem calc(2rem + env(safe-area-inset-bottom)); /* clear the home indicator */
-  border-block-start: 1px solid var(--border);
   color: var(--muted);
   text-align: center;
 }
@@ -309,6 +308,8 @@ main:focus { outline: none; }
   transition: background-size 1s cubic-bezier(.65, 0, .35, 1) .6s;
 }
 [dir="rtl"] .hl { background-position-x: 100%; }
+/* Amiri sits high in its line box: raise the band behind big Arabic headings */
+.sec-head h2 .hl:lang(ar) { background-position-y: 62%; }
 .alpine .reveal:not(.is-in) .hl { background-size: 0 .42em; }
 
 /* Scroll reveal: only hidden once Alpine runs, so content never disappears without JS */
@@ -444,7 +445,7 @@ main:focus { outline: none; }
 }
 .facts li { display: flex; align-items: center; gap: .75rem; }
 /* Links look like links: accent colour + underline; ↗ marks ones that open a new tab */
-.facts a {
+.link {
   color: var(--accent);
   font-weight: 600;
   text-decoration: underline;
@@ -454,9 +455,9 @@ main:focus { outline: none; }
   unicode-bidi: isolate;
   transition: text-decoration-color .2s;
 }
-.facts a:focus-visible { text-decoration-color: currentColor; }
-.facts a[target="_blank"]::after { content: " ↗" / ""; font-weight: 400; }
-[dir="rtl"] .facts a[target="_blank"]:not([dir="ltr"])::after { content: " ↖" / ""; }
+.link:focus-visible { text-decoration-color: currentColor; }
+.link[target="_blank"]::after { content: " ↗" / ""; font-weight: 400; }
+[dir="rtl"] .link[target="_blank"]:not([dir="ltr"])::after { content: " ↖" / ""; }
 .icon {
   inline-size: 1.25rem;
   block-size: 1.25rem;
@@ -470,7 +471,7 @@ main:focus { outline: none; }
 @media (hover: hover) {
   .note:hover { rotate: 0deg; }
   .note:hover .note-pin { rotate: 120deg; }
-  .facts a:hover { text-decoration-color: currentColor; }
+  .link:hover { text-decoration-color: currentColor; }
 }
 
 @media (max-width: 56rem) {
@@ -599,6 +600,9 @@ main:focus { outline: none; }
   position: absolute;
   inset-block-start: .7em;
   inset-inline-start: .2rem;
+}
+/* Shared petal shape: bullets and footer separators */
+.petals li::before, .footer-links li + li::before {
   inline-size: .55rem;
   block-size: .55rem;
   background: var(--sun);
@@ -615,6 +619,96 @@ main:focus { outline: none; }
 
 @media (max-width: 56rem) {
   .stem { --stem-pad: 2.5rem; --line-x: .75rem; }
+}
+
+/* =================== Contact: "sunrise finale" =================== */
+.contact { --sun-size: clamp(18rem, 42vw, 34rem); position: relative; overflow: clip; padding-block-end: calc(var(--sun-size) * .5 + 4rem); }
+.contact .container { position: relative; z-index: 1; }
+.contact .sec-head h2 { font-size: clamp(2.75rem, 7vw, 6rem); line-height: 1.15; }
+.contact-sub { margin-block-start: 1.25rem; max-inline-size: 38rem; color: var(--muted); font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); }
+
+.cta-list { max-inline-size: 56rem; margin: clamp(2.5rem, 6vw, 4rem) auto 0; border-block: 1px solid var(--control-border); }
+.cta-list > * + * { border-block-start: 1px solid var(--control-border); }
+.cta {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+  gap: .75rem 1.25rem;
+  padding: 1.5rem 1rem;
+  color: var(--fg);
+  text-decoration: none;
+  /* marker band that sweeps across on hover / focus */
+  background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 0 / 0 100%;
+  transition: background-size .6s cubic-bezier(.65, 0, .35, 1);
+}
+[dir="rtl"] .cta { background-position: 100% 0; }
+.cta:hover, .cta:focus-visible { background-size: 100% 100%; }
+.cta-mark { inline-size: 1.75rem; block-size: 1.75rem; transition: rotate .9s cubic-bezier(.34, 1.56, .64, 1); }
+.cta-label { font-family: var(--font-display); font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3rem); font-weight: 700; line-height: 1.2; }
+.cta-detail { justify-self: end; color: var(--muted); font-size: .95rem; unicode-bidi: isolate; }
+.cta-arrow { color: var(--accent); font-size: 1.75rem; line-height: 1; transition: translate .3s ease; }
+/* On the band everything switches to the main text colour (keeps contrast ≥ 6:1) */
+.cta:hover :is(.cta-detail, .cta-arrow), .cta:focus-visible :is(.cta-detail, .cta-arrow) { color: var(--fg); }
+.cta:hover .cta-mark, .cta:focus-visible .cta-mark { rotate: 1turn; }
+.cta:hover .cta-arrow, .cta:focus-visible .cta-arrow { translate: .5rem 0; }
+[dir="rtl"] .cta:hover .cta-arrow, [dir="rtl"] .cta:focus-visible .cta-arrow { translate: -.5rem 0; }
+
+.cta-row { display: grid; grid-template-columns: 1fr auto; align-items: center; }
+.copy-btn { margin-inline: .5rem 1rem; padding-inline: 1rem; font-size: .9rem; font-weight: 600; white-space: nowrap; }
+
+/* The sunflower rises like the sun as you reach the end */
+.sunrise {
+  --sz: var(--sun-size);
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--sz) * -.5);
+  inline-size: var(--sz);
+  margin-left: calc(var(--sz) / -2);
+  isolation: isolate;
+  pointer-events: none;
+}
+.sunrise::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--sun) 50%, transparent), transparent 62%);
+  filter: blur(14px);
+  animation: breathe 8s ease-in-out infinite;
+}
+.sunrise img { inline-size: 100%; animation: spin 60s linear infinite; }
+@supports (animation-timeline: view()) {
+  .sunrise img {
+    animation: spin 60s linear infinite, sunrise linear both;
+    animation-timeline: auto, view();
+    animation-range: normal, entry 0% cover 55%;
+  }
+  @keyframes sunrise { from { translate: 0 45%; rotate: -90deg; } }
+}
+
+/* =================== Footer =================== */
+.footer .divider { margin-block: 0 2rem; }
+.footer-name { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; color: var(--fg); text-decoration: none; }
+.footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem 0; margin-block: 1rem 0; padding: 0; list-style: none; }
+.footer-links li + li::before { content: ""; display: inline-block; margin-inline: 1rem; vertical-align: middle; }
+.footer-copy { margin-block-start: 1.25rem; font-size: .9rem; }
+.to-top { display: inline-flex; align-items: center; gap: .4rem; margin-block-start: 1.25rem; color: var(--muted); font-size: .85rem; text-decoration: none; }
+.to-top .mark { inline-size: 1.1rem; block-size: 1.1rem; transition: rotate .9s cubic-bezier(.34, 1.56, .64, 1); }
+
+@media (hover: hover) {
+  .footer-name:hover { color: var(--accent); }
+  .to-top:hover { color: var(--fg); }
+  .to-top:hover .mark { rotate: -1turn; }
+}
+
+@media (max-width: 40rem) {
+  .contact { --sun-size: 16rem; }
+  .cta { grid-template-columns: auto 1fr auto; padding-inline: .5rem; }
+  .cta-detail { grid-column: 2; grid-row: 2; justify-self: start; }
+  .cta-arrow { grid-column: 3; grid-row: 1 / span 2; }
+  .cta-row { grid-template-columns: 1fr; }
+  .copy-btn { justify-self: start; margin: 0 .5rem 1.25rem; }
 }
 
 /* Hover effects only where a real pointer can hover (avoids "stuck" hover after a tap) */
