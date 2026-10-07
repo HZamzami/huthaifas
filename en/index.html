@@ -132,7 +132,7 @@
 
         <div class="about-grid">
           <div class="about-story reveal" style="--d: 1" x-intersect.once="$el.classList.add('is-in')">
-            <p class="lead">A content creator specializing in <mark class="hl">storytelling</mark> and digital content. I combine in-depth research, creative writing, and professional voice performance to produce content that expresses brand identities and serves strategic objectives.</p>
+            <p class="lead">A content creator and researcher specializing in <mark class="hl">storytelling</mark>, skilled at turning complex data and information into tangible creative experiences. I blend creative writing with professional voice performance to deliver documentary and narrative content that leaves a mark, with extensive experience producing podcasts and distinguished annual reports.</p>
             <p>Proven experience <mark class="hl">turning data and achievements into success stories</mark> across annual reports, podcasts, and documentaries. I work with a passion for connecting information to people through storytelling that inspires and moves.</p>
 
             <div class="divider" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
@@ -160,8 +160,106 @@
       </div>
     </section>
 
-    <section id="experience" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="experience-title">
-      <div class="container"><h2 id="experience-title">Experience</h2></div>
+    <section id="experience" class="section experience" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="experience-title">
+      <span class="bg-word" aria-hidden="true">Journey</span>
+      <div class="container">
+        <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
+          <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+          <p class="eyebrow">Career Path</p>
+          <h2 id="experience-title">Experience</h2>
+          <svg class="scribble" viewBox="0 0 200 14" aria-hidden="true"><path pathLength="1" d="M3 9 C40 3 80 12 120 6 S188 4 197 8"/></svg>
+        </header>
+
+        <div class="stem">
+          <h3 class="stem-group">Employment</h3>
+
+          <article class="job is-current reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Creative Content Writer</span><time class="job-time" datetime="2026-06">June 2026 – <span class="now">Present</span></time></p>
+            <h4 class="job-org">Brooka Consulting &amp; Creative Solutions</h4>
+            <ul class="petals">
+              <li><strong class="client">“Khallik Fahem”</strong>: Built the strategic and editorial tone-of-voice guide from scratch, and developed the full curriculum for the “Khallik Musaytir” track, alongside LinkedIn content.</li>
+              <li><strong class="client">“Miyah Sahtain”</strong>: Established the narrative direction and brand voice from scratch, writing short scripts drawn from everyday life that speak naturally to a Saudi audience.</li>
+              <li><strong class="client">“Nawaya Zubaida”</strong>: Edited and crafted multilingual tourism content, developing destination guides and a digital experience consistent with the brand identity.</li>
+              <li><strong class="client">“Brooka Real Estate” &amp; “Black and White”</strong>: Wrote company profiles and developed content ideas that translate each project’s identity and value.</li>
+              <li><strong class="client">Brooka Group &amp; its clients</strong>: Turned project briefs into campaigns, marketing copy, and platform content ready for design and publishing.</li>
+            </ul>
+          </article>
+
+          <article class="job reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Content Producer &amp; Researcher</span><span class="job-sub">Hyperlink Podcast</span></p>
+            <h4 class="job-org">Thmanyah Publishing &amp; Distribution</h4>
+            <ul class="petals">
+              <li>Created and developed creative concepts, and led brainstorming sessions to define episode themes.</li>
+              <li>Conducted in-depth research and turned it into production-ready material, fact-checked to the platform’s high standards.</li>
+              <li>Managed and coordinated field interviews with specialists, extracting the core stories behind each one.</li>
+            </ul>
+          </article>
+
+          <article class="job reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Content Writer &amp; Voice-over Artist</span></p>
+            <h4 class="job-org">Different Excellence</h4>
+            <ul class="petals">
+              <li>Wrote advertising and narrative scripts that reflect brand identities in an engaging style.</li>
+              <li>Delivered voice-over projects, proofreading, and creative editing.</li>
+              <li>Wrote and voiced the documentary film “The Story of Al-Jidar Al-Qibli.”</li>
+            </ul>
+          </article>
+
+          <h3 class="stem-group">Freelance &amp; Projects</h3>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Creative Content Writer &amp; Developer</span><span class="job-sub">2023 Report Project</span></p>
+            <h4 class="job-org">Ministry of Environment, Water and Agriculture | Saudi Reef</h4>
+            <ul class="petals">
+              <li>Turned data and achievements into a cohesive story reflecting the Ministry’s strategic identity.</li>
+              <li>Built the report’s structure and crafted its messaging, simplifying technical information into precise, engaging language.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Creative Content Writer &amp; Editor</span><span class="job-sub">Social Media Project</span></p>
+            <h4 class="job-org">Nusuk App</h4>
+            <ul class="petals">
+              <li>Developed creative concepts for the Guests of Al-Rahman that highlight the app’s digital features and enrich their experience.</li>
+              <li>Aligned tone, editing, and creative translation (Arabic/English) with the target audience.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Creative Content Developer</span></p>
+            <h4 class="job-org">Strategic Projects: Raghid, Future Pioneers, Nidaa Al-Noor</h4>
+            <ul class="petals">
+              <li>Built the identities of the initiatives, articulating their vision, mission, and core values.</li>
+              <li>Prepared the editorial strategy and developed sales content for the Souq T2 website.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Scriptwriter &amp; Content Researcher</span></p>
+            <h4 class="job-org">Cultural &amp; Script Projects</h4>
+            <ul class="petals">
+              <li>Wrote episodes for narrative cultural programs, leading research to ensure accuracy in every script.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">Writer, Poet &amp; Voice-over Artist</span></p>
+            <h4 class="job-org">Audio &amp; Literary Production</h4>
+            <ul class="petals">
+              <li>Delivered 40+ voice projects spanning ads, articles, and documentaries, plus commissioned literary work such as occasion poems, alongside independent personal writing.</li>
+            </ul>
+            <p class="stat" aria-hidden="true"><span class="stat-num" dir="ltr" x-data="{ n: 40, count() { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; this.n = 0; const t = setInterval(() => { if (++this.n >= 40) clearInterval(t) }, 30) } }" x-intersect.once="count()" x-text="'+' + n">+40</span><span class="stat-label">voice projects</span></p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section id="projects" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="projects-title">

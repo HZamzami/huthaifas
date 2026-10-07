@@ -132,7 +132,7 @@
 
         <div class="about-grid">
           <div class="about-story reveal" style="--d: 1" x-intersect.once="$el.classList.add('is-in')">
-            <p class="lead">صانع محتوى متخصص في <mark class="hl">السرد القصصي</mark> وصناعة المحتوى الرقمي. أجمع بين البحث المعمق والكتابة الإبداعية والأداء الصوتي الاحترافي لإنتاج محتوى يُعبّر عن هوية العلامات التجارية ويخدم أهدافها الاستراتيجية.</p>
+            <p class="lead">صانع محتوى وباحث متخصص في <mark class="hl">السرد القصصي</mark> (<span lang="en">Storytelling</span>)، أمتلك مهارة تحويل البيانات والمعلومات المعقدة إلى تجارب إبداعية ملموسة. أدمج بين الكتابة الإبداعية والأداء الصوتي الاحترافي لتقديم محتوى وثائقي وقصصي يترك أثرًا، مع خبرة واسعة في إعداد البودكاست والتقارير السنوية النوعية.</p>
             <p>خبرة موثقة في <mark class="hl">تحويل البيانات والإنجازات إلى قصص نجاح</mark> ضمن التقارير السنوية والبودكاست والوثائقيات. أعمل بشغف على ربط المعلومة بالإنسان من خلال السرد الذي يُلهم ويُحرّك.</p>
 
             <div class="divider" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
@@ -160,8 +160,106 @@
       </div>
     </section>
 
-    <section id="experience" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="experience-title">
-      <div class="container"><h2 id="experience-title">الخبرات</h2></div>
+    <section id="experience" class="section experience" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="experience-title">
+      <span class="bg-word" aria-hidden="true">مسيرة</span>
+      <div class="container">
+        <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
+          <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+          <p class="eyebrow">المسيرة المهنية</p>
+          <h2 id="experience-title">الخبرات</h2>
+          <svg class="scribble" viewBox="0 0 200 14" aria-hidden="true"><path pathLength="1" d="M3 9 C40 3 80 12 120 6 S188 4 197 8"/></svg>
+        </header>
+
+        <div class="stem">
+          <h3 class="stem-group">الخبرات الوظيفية</h3>
+
+          <article class="job is-current reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">كاتب محتوى إبداعي</span><time class="job-time" datetime="2026-06">يونيو 2026 – <span class="now">حتى الآن</span></time></p>
+            <h4 class="job-org">شركة بروكا للاستشارات والحلول الإبداعية</h4>
+            <ul class="petals">
+              <li><strong class="client">«خلك فاهم»</strong>: تأسيس دليل النبرة الاستراتيجية والتحريرية من الصفر، وتطوير منهج مواد مسار «خلك مسيطر» كاملًا، إلى جانب محتوى <span lang="en">LinkedIn</span>.</li>
+              <li><strong class="client">«مياه صحتين»</strong>: تأسيس التوجه السردي وصوت العلامة من الصفر، وكتابة سيناريوهات قصيرة تنطلق من الحياة اليومية وتخاطب الجمهور السعودي بطبيعية.</li>
+              <li><strong class="client">«نوايا زبيدة»</strong>: تحرير وصياغة محتوى سياحي متعدد اللغات، وتطوير أدلة وجهات وتجربة رقمية متسقة مع الهوية.</li>
+              <li><strong class="client">«بروكا العقارية» و«بلاك آند وايت»</strong>: كتابة الملفات التعريفية وتطوير أفكار المحتوى بما يترجم هوية كل مشروع وقيمته.</li>
+              <li><strong class="client">مجموعة بروكا وعملاؤها</strong>: تحويل موجزات المشاريع إلى حملات ونصوص تسويقية ومحتوى منصات جاهز للتصميم والنشر.</li>
+            </ul>
+          </article>
+
+          <article class="job reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">مُنتج محتوى وباحث</span><span class="job-sub">بودكاست رابط تشعبي</span></p>
+            <h4 class="job-org">شركة ثمانية للنشر والتوزيع</h4>
+            <ul class="petals">
+              <li>ابتكار وتطوير الأفكار الإبداعية وإدارة جلسات العصف الذهني لتحديد محاور الحلقات.</li>
+              <li>إجراء البحوث المعمقة وتحويلها لمادة صالحة للإنتاج والتدقيق وفق معايير المنصة العالية.</li>
+              <li>إدارة وتنسيق المقابلات الميدانية مع المختصين واستخلاص القصص الجوهرية منها.</li>
+            </ul>
+          </article>
+
+          <article class="job reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">كاتب محتوى ومعلق صوتي</span></p>
+            <h4 class="job-org">شركة التميز المختلف (<span lang="en">Different Excellence</span>)</h4>
+            <ul class="petals">
+              <li>صياغة سيناريوهات إعلانية وقصصية تعكس هوية العلامات التجارية بأسلوب جاذب.</li>
+              <li>تنفيذ مشاريع التعليق الصوتي والتدقيق اللغوي والتحرير الفني.</li>
+              <li>كتابة وتعليق صوتي للفيلم الوثائقي: قصة الجدار القبلي.</li>
+            </ul>
+          </article>
+
+          <h3 class="stem-group">الأعمال الحرة والمشاريع</h3>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">كاتب ومعد محتوى إبداعي</span><span class="job-sub">مشروع تقرير 2023</span></p>
+            <h4 class="job-org">وزارة البيئة والمياه والزراعة | ريف السعودية</h4>
+            <ul class="petals">
+              <li>تحويل البيانات والإنجازات إلى قصة متكاملة تعكس الهوية الاستراتيجية للوزارة.</li>
+              <li>بناء هيكلية التقرير وصياغة رسائله، وتبسيط المعلومات الفنية بلغة دقيقة وجاذبة.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">كاتب محتوى إبداعي ومحرر</span><span class="job-sub">مشروع منصات التواصل</span></p>
+            <h4 class="job-org">تطبيق نُسك (<span lang="en">Nusuk</span>)</h4>
+            <ul class="petals">
+              <li>تطوير مفاهيم إبداعية لضيوف الرحمن تبرز ميزات التطبيق الرقمية وتثري التجربة.</li>
+              <li>مواءمة النبرة والتحرير والترجمة الإبداعية (عربي/إنجليزي) مع الجمهور المستهدف.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">معد ومطور محتوى إبداعي</span></p>
+            <h4 class="job-org">مشاريع استراتيجية: رغيد، رواد المستقبل، نداء النور</h4>
+            <ul class="petals">
+              <li>بناء الهوية التعريفية للمبادرات وصياغة الرؤية والرسالة والقيم الجوهرية.</li>
+              <li>إعداد الاستراتيجية التحريرية وتطوير المحتوى البيعي لموقع (<span lang="en" dir="ltr">Souq T2</span>).</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">كاتب سيناريو وباحث محتوى</span></p>
+            <h4 class="job-org">مشاريع ثقافية وسيناريو</h4>
+            <ul class="petals">
+              <li>تأليف حلقات لبرامج ثقافية سردية، وقيادة البحث لضمان دقة المعلومات في النصوص.</li>
+            </ul>
+          </article>
+
+          <article class="job job--small reveal" x-intersect.once="$el.classList.add('is-in')">
+            <span class="bud" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span>
+            <p class="job-meta"><span class="job-role">أديب وشاعر ومعلق صوتي</span></p>
+            <h4 class="job-org">الإنتاج الصوتي والأدبي</h4>
+            <ul class="petals">
+              <li>تنفيذ أكثر من 40 مشروعًا صوتيًا بين الإعلانات والمقالات والوثائقيات، وكتابة محتوى أدبي بيعي مثل قصائد المناسبات، إلى جانب إنتاج أدبي شخصي مستقل.</li>
+            </ul>
+            <p class="stat" aria-hidden="true"><span class="stat-num" dir="ltr" x-data="{ n: 40, count() { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; this.n = 0; const t = setInterval(() => { if (++this.n >= 40) clearInterval(t) }, 30) } }" x-intersect.once="count()" x-text="'+' + n">+40</span><span class="stat-label">مشروعًا صوتيًا</span></p>
+          </article>
+        </div>
+      </div>
     </section>
 
     <section id="projects" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="projects-title">

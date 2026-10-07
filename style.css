@@ -4,8 +4,8 @@
 img, svg, video { display: block; max-inline-size: 100%; block-size: auto; }
 button { font: inherit; color: inherit; }
 a { color: inherit; }
-h1, h2, h3 { line-height: 1.2; text-wrap: balance; }
-h1, h2, h3, .brand { font-family: var(--font-display); }
+h1, h2, h3, h4 { line-height: 1.2; text-wrap: balance; }
+h1, h2, h3, h4, .brand { font-family: var(--font-display); }
 p { text-wrap: pretty; }
 [x-cloak] { display: none !important; }
 
@@ -26,6 +26,7 @@ p { text-wrap: pretty; }
   --surface: #f4ecdd;
   --border: #e6dccb;
   --control-border: #b3a08b;
+  --stem: #6f802e;                                          /* the flower's green */
   --ink-line: #5e4247;                                      /* the flower's outline */
   --hl: color-mix(in srgb, var(--sun) 55%, var(--bg));      /* marker highlight */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .37 0 0 0 0 .26 0 0 0 0 .28 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -40,6 +41,7 @@ p { text-wrap: pretty; }
   --surface: #332a24;
   --border: #4a3e35;
   --control-border: #6f6054;
+  --stem: #8a9a48;
   --hl: color-mix(in srgb, var(--sun) 30%, var(--bg));
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .95 0 0 0 0 .85 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --accent: var(--sun);
@@ -338,8 +340,9 @@ main:focus { outline: none; }
 .alpine .sec-head:not(.is-in) .scribble path { stroke-dashoffset: 1; }
 
 /* =================== About =================== */
-.about { position: relative; overflow: clip; }
-.about .container { position: relative; }
+.about, .experience { position: relative; overflow: clip; }
+.about .container, .experience .container { position: relative; }
+.experience { --section-bg: var(--bg); }
 
 /* Giant outlined word drifting behind the section */
 .bg-word {
@@ -351,7 +354,7 @@ main:focus { outline: none; }
   font-weight: 700;
   line-height: 1;
   /* Solid ghost, not an outline: outlines expose the overlapping joins of Arabic letters */
-  color: color-mix(in srgb, var(--fg) 7%, var(--surface)); /* opaque, so overlapping letter parts don't darken */
+  color: color-mix(in srgb, var(--fg) 7%, var(--section-bg, var(--surface))); /* opaque, so overlapping letter parts don't darken */
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
@@ -476,6 +479,142 @@ main:focus { outline: none; }
   .note { rotate: -1deg; }
   .langs { justify-content: center; text-align: center; }
   .bg-word { inset-block-start: 3%; }
+}
+
+/* =================== Experience: "the stem" =================== */
+.stem {
+  --stem-pad: clamp(2.75rem, 6vw, 4.5rem);  /* room for the stem */
+  --line-x: 1rem;                           /* where the stem runs */
+  position: relative;
+  max-inline-size: 54rem;
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
+  padding-inline-start: var(--stem-pad);
+  view-timeline: --stem block;
+}
+.stem::before {
+  content: "";
+  position: absolute;
+  inset-block: .5rem 0;
+  inset-inline-start: calc(var(--line-x) - 1.5px);
+  inline-size: 3px;
+  border-radius: 3px;
+  background: linear-gradient(var(--sun), var(--stem) 8rem, var(--stem) 85%, transparent);
+}
+/* The stem grows as you scroll (where supported; otherwise it's simply there) */
+@supports (animation-timeline: view()) {
+  .stem::before {
+    transform-origin: top;
+    animation: grow linear both;
+    animation-timeline: --stem;
+    animation-range: entry 0% entry 100%;
+  }
+  @keyframes grow { from { scale: 1 0; } }
+}
+
+/* Group headings sit on the stem as leaves */
+.stem-group {
+  position: relative;
+  margin-block: 1rem .25rem;
+  color: var(--accent);
+  font-size: clamp(1.2rem, 1rem + .6vw, 1.45rem);
+}
+.stem-group + .job { border-block-start: 0; }
+.job + .stem-group { margin-block-start: 3rem; }
+.stem-group::before {
+  content: "";
+  position: absolute;
+  inset-block-start: .35em;
+  inset-inline-start: calc(var(--line-x) - var(--stem-pad) + 2px);
+  inline-size: 1.2rem;
+  block-size: .7rem;
+  background: var(--stem);
+  border-radius: 0 100% 0 100%;
+  rotate: -25deg;
+}
+[dir="rtl"] .stem-group::before { rotate: 25deg; border-radius: 100% 0 100% 0; }
+
+/* Each job: pure typography on the paper */
+.job { position: relative; padding-block: 1.75rem 2.25rem; }
+.job + .job { border-block-start: 1px dashed var(--control-border); }
+.job-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 0; font-size: .95rem; }
+.job-meta > * + *::before { content: "·"; margin-inline: .6em; color: var(--muted); }
+.job-role { color: var(--accent); font-weight: 600; }
+.job-sub, .job-time { color: var(--muted); }
+.now { color: var(--accent); font-weight: 600; }
+.now::before {
+  content: "";
+  display: inline-block;
+  inline-size: .5rem;
+  block-size: .5rem;
+  margin-inline-end: .4rem;
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sun) 30%, transparent);
+  vertical-align: .1em;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.job-org { margin-block-start: .35rem; font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); line-height: 1.3; }
+.job--small .job-org { font-size: clamp(1.3rem, 1.1rem + .8vw, 1.7rem); }
+
+/* Bud on the stem that blooms into a sunflower when the job scrolls in */
+.bud {
+  position: absolute;
+  isolation: isolate;
+  inset-block-start: 1.85rem;
+  inset-inline-start: calc(var(--line-x) - var(--stem-pad) - .875rem);
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  background: var(--section-bg, var(--bg));
+}
+.bud .mark {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  transition: scale .9s cubic-bezier(.34, 1.56, .64, 1) .15s, rotate .9s cubic-bezier(.34, 1.56, .64, 1) .15s, filter .6s ease .15s;
+}
+.alpine .job:not(.is-in) .bud .mark { scale: .3; rotate: -120deg; filter: grayscale(1); }
+.is-current .bud {
+  inset-block-start: 1.5rem;
+  inset-inline-start: calc(var(--line-x) - var(--stem-pad) - 1.25rem);
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+}
+.is-current .bud::before {
+  content: "";
+  position: absolute;
+  inset: -70%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--sun) 55%, transparent), transparent 65%);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Petal bullets */
+.petals { display: grid; gap: .6rem; margin-block-start: 1rem; padding: 0; list-style: none; max-inline-size: 65ch; }
+.petals li { position: relative; padding-inline-start: 1.5rem; line-height: 1.9; }
+.petals li:lang(en) { line-height: 1.75; }
+.petals li::before {
+  content: "";
+  position: absolute;
+  inset-block-start: .7em;
+  inset-inline-start: .2rem;
+  inline-size: .55rem;
+  block-size: .55rem;
+  background: var(--sun);
+  border: 1px solid var(--ink-line);
+  border-radius: 0 70% 0 70%;
+  rotate: 45deg;
+}
+.client { font-family: var(--font-display); font-size: 1.08em; font-weight: 700; }
+
+/* Big stat that counts up */
+.stat { display: flex; align-items: baseline; gap: .75rem; margin-block-start: 1.25rem; }
+.stat-num { font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 700; line-height: 1; color: var(--accent); }
+.stat-label { color: var(--muted); font-weight: 600; }
+
+@media (max-width: 56rem) {
+  .stem { --stem-pad: 2.5rem; --line-x: .75rem; }
 }
 
 /* Hover effects only where a real pointer can hover (avoids "stuck" hover after a tap) */
