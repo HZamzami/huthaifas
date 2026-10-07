@@ -124,7 +124,7 @@
       <span class="bg-word" aria-hidden="true">حكاية</span>
       <div class="container">
         <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
-          <div class="ornament" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+          <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
           <p class="eyebrow">نبذة عني</p>
           <h2 id="about-title">الملخص المهني</h2>
           <svg class="scribble" viewBox="0 0 200 14" aria-hidden="true"><path pathLength="1" d="M3 9 C40 3 80 12 120 6 S188 4 197 8"/></svg>
