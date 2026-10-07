@@ -15,7 +15,7 @@ p { text-wrap: pretty; }
   /* Side gutter that also clears the iPhone notch / rounded corners in landscape */
   --gutter: max(clamp(1.25rem, 5vw, 5rem), env(safe-area-inset-left), env(safe-area-inset-right));
   --content-max: 76rem;
-  --font-body: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-display: "Amiri", serif;
 
   /* Palette drawn from the sunflower: paper, plum ink, burnt orange, yellow */
@@ -48,7 +48,7 @@ p { text-wrap: pretty; }
   color-scheme: dark;
 }
 
-:lang(en) { --font-display: "Cormorant Garamond", Georgia, serif; }
+:lang(en) { --font-display: "STIX Two Text", Georgia, serif; }
 :lang(ar) { --font-display: "Amiri", serif; }
 
 /* ---------- Base ---------- */
