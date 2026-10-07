@@ -440,7 +440,20 @@ main:focus { outline: none; }
   font-size: .95rem;
 }
 .facts li { display: flex; align-items: center; gap: .75rem; }
-.facts a { color: var(--fg); text-decoration: none; unicode-bidi: isolate; }
+/* Links look like links: accent colour + underline; ↗ marks ones that open a new tab */
+.facts a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: .3em;
+  unicode-bidi: isolate;
+  transition: text-decoration-color .2s;
+}
+.facts a:focus-visible { text-decoration-color: currentColor; }
+.facts a[target="_blank"]::after { content: " ↗" / ""; font-weight: 400; }
+[dir="rtl"] .facts a[target="_blank"]:not([dir="ltr"])::after { content: " ↖" / ""; }
 .icon {
   inline-size: 1.25rem;
   block-size: 1.25rem;
@@ -454,7 +467,7 @@ main:focus { outline: none; }
 @media (hover: hover) {
   .note:hover { rotate: 0deg; }
   .note:hover .note-pin { rotate: 120deg; }
-  .facts a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: .25em; }
+  .facts a:hover { text-decoration-color: currentColor; }
 }
 
 @media (max-width: 56rem) {
