@@ -869,7 +869,7 @@ main:focus { outline: none; }
 }
 
 /* =================== Featured: "a journey in three chapters" =================== */
-.journey { position: relative; isolation: isolate; view-timeline: --journey block; }
+.journey { position: relative; isolation: isolate; overflow: clip; /* keeps the sticky sun inside the journey */ view-timeline: --journey block; }
 .journey > .container, .chapter { position: relative; z-index: 1; }
 
 /* The sun crossing the sky behind the chapters */
@@ -1103,7 +1103,7 @@ main:focus { outline: none; }
   gap: .4rem 1rem;
   padding: clamp(1.25rem, 3vw, 2rem);
   border: 0;
-  background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 100% / 100% 0;
+  background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 100% 0;
   color: var(--fg);
   font: inherit;
   text-align: start;
@@ -1111,13 +1111,15 @@ main:focus { outline: none; }
   transition: background-size .5s cubic-bezier(.65, 0, .35, 1), opacity .3s;
 }
 .door + .door { border-inline-start: 1px solid var(--control-border); }
-.door.is-open { background-size: 100% 100%; }
-.door.is-dim { opacity: .55; }
+/* Open door: a sun-coloured accent bar along its bottom edge, like an active tab */
+.door.is-open { background-size: 100% 4px; }
+.door.is-dim { opacity: .6; }
+.door:focus-visible { outline-offset: -6px; }
 .door-icon { grid-area: icon; inline-size: 2rem; block-size: 2rem; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .door-count { grid-area: count; justify-self: end; font-family: var(--font-display); font-size: clamp(2.25rem, 1.75rem + 2vw, 3.5rem); font-weight: 700; line-height: 1; color: var(--accent); }
 .door-label { grid-area: label; font-family: var(--font-display); font-size: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem); font-weight: 700; line-height: 1.2; }
 .door-desc { grid-area: desc; color: var(--muted); font-size: .95rem; }
-.door.is-open :is(.door-count, .door-desc) { color: var(--fg); }
+.door.is-open .door-label { text-decoration: underline; text-decoration-color: var(--sun); text-decoration-thickness: .35em; text-underline-offset: -.15em; text-decoration-skip-ink: none; }
 
 .door-panel { padding-block: clamp(2rem, 5vw, 3rem) 0; }
 .alpine .door-panel:not(.is-open) { display: none; }
@@ -1169,7 +1171,7 @@ main:focus { outline: none; }
 .trk-title { font-family: var(--font-display); font-size: clamp(1.1rem, 1rem + .4vw, 1.35rem); font-weight: 700; line-height: 1.35; }
 .trk-type { color: var(--muted); font-size: .85rem; }
 .trk-time { color: var(--muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
-.trk-bar { grid-column: 2 / -1; inline-size: 100%; block-size: 1.25rem; margin: 0; accent-color: var(--accent); cursor: pointer; }
+.trk-bar { direction: ltr; /* time and progress read left-to-right in both languages */ grid-column: 2 / -1; inline-size: 100%; block-size: 1.25rem; margin: 0; accent-color: var(--accent); cursor: pointer; }
 .trk audio { grid-column: 1 / -1; inline-size: 100%; }
 
 /* Read: filter pills + sheets of paper on a desk */
@@ -1223,7 +1225,7 @@ main:focus { outline: none; }
 .archive { margin-block-start: 1.5rem; text-align: center; }
 
 /* Lightbox */
-.lightbox { inline-size: min(92vw, 72rem); padding: 0; border: 0; background: transparent; overflow: visible; }
+.lightbox { inline-size: min(92vw, 72rem); margin: auto; /* the global reset removes the dialog's centring margin */ padding: 0; border: 0; background: transparent; overflow: visible; }
 .lightbox::backdrop { background: rgb(20 15 12 / .85); backdrop-filter: blur(4px); }
 .lightbox iframe { display: block; inline-size: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: .75rem; background: #000; }
 .lightbox-close { position: absolute; inset-block-end: calc(100% + .75rem); inset-inline-end: 0; }
@@ -1231,7 +1233,7 @@ main:focus { outline: none; }
 @media (hover: hover) {
   .screen:hover img { scale: 1.04; }
   .screen:hover .screen-icon, .record-btn:hover { scale: 1.08; }
-  .door:not(.is-open):hover { background-size: 100% .35em; }
+  .door:not(.is-open):hover { background-size: 100% 2px; }
   .pill:hover { border-color: var(--accent); color: var(--fg); }
 }
 
