@@ -1325,3 +1325,8 @@ main:focus { outline: none; }
 /* Hero: the highlight sweeps in after the text rises */
 .hero .hl { animation: sweep 1s cubic-bezier(.65, 0, .35, 1) 1s both; }
 @keyframes sweep { from { background-size: 0 .42em; } }
+
+/* Amiri's diacritics (tanween, shadda…) sit high above the letters:
+   give big Arabic headings enough line height so they don't collide with the line above */
+:is(.ch-title, .job-org, .door-label, .sheet-title, .sec-head h2):lang(ar) { line-height: 1.5; }
+.contact .sec-head h2:lang(ar) { line-height: 1.45; }
