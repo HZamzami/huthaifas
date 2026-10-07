@@ -9,6 +9,7 @@
   <title>حذيفة العماري — صانع محتوى · معلق صوتي · كاتب إبداعي</title>
   <meta name="description" content="حذيفة العماري — صانع محتوى · معلق صوتي · كاتب إبداعي.">
   <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <!-- Browser bar colour (Safari / Chrome on Android), kept in sync with the theme -->
   <meta name="theme-color" content="#fbf7ef" :content="theme === 'dark' ? '#2a231e' : '#fbf7ef'">
 
@@ -114,7 +115,7 @@
           </div>
         </div>
         <div class="hero-art">
-          <img class="hero-flower" src="assets/sunflower.png" alt="" width="620" height="620" fetchpriority="high">
+          <img class="hero-flower" src="assets/sunflower.svg" alt="" width="620" height="620" fetchpriority="high">
         </div>
       </div>
       <div class="scroll-hint" aria-hidden="true">اكتشف<span></span></div>
@@ -324,7 +325,7 @@
       </div>
     </section>
 
-    <section id="contact" class="section contact" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="contact-title">
+    <section id="contact" class="section contact" x-intersect.margin.-50%.0px="active = $el.id" x-intersect.once.margin.-25%.0px="$el.classList.add('is-in')" aria-labelledby="contact-title">
       <div class="container">
         <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
           <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
@@ -355,8 +356,14 @@
         </div>
       </div>
 
+      <!-- Huthaifah (sunflower-headed avatar) leans in from the edge to say hi -->
+      <div class="peek" aria-hidden="true">
+        <img src="assets/avatar.svg" alt="" width="1516" height="4452" loading="lazy">
+      </div>
+      <p class="peek-bubble" aria-hidden="true">تعال نسولف!</p>
+
       <div class="sunrise" aria-hidden="true">
-        <img src="assets/sunflower.png" alt="" width="620" height="620" loading="lazy">
+        <img src="assets/sunflower.svg" alt="" width="620" height="620" loading="lazy">
       </div>
     </section>
   </main>
@@ -371,7 +378,7 @@
         <li><a class="link" href="https://drive.google.com/drive/folders/1adrf3SVzUqDVwgOwex_jtM6HRGi3OKk7" target="_blank" rel="noopener">ملف الأعمال</a></li>
       </ul>
       <p class="footer-copy"><small>© <span x-text="new Date().getFullYear()">2026</span> · huthaifas.site · جميع الحقوق محفوظة</small></p>
-      <a class="to-top" href="#hero"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg>للأعلى</a>
+      <a class="to-top" href="#hero"><span class="to-top-head" aria-hidden="true"><img src="assets/avatar.svg" alt="" width="1516" height="4452" loading="lazy"></span>للأعلى</a>
     </div>
   </footer>
 </body>

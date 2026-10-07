@@ -694,12 +694,22 @@ main:focus { outline: none; }
 .footer-links li + li::before { content: ""; display: inline-block; margin-inline: 1rem; vertical-align: middle; }
 .footer-copy { margin-block-start: 1.25rem; font-size: .9rem; }
 .to-top { display: inline-flex; align-items: center; gap: .4rem; margin-block-start: 1.25rem; color: var(--muted); font-size: .85rem; text-decoration: none; }
-.to-top .mark { inline-size: 1.1rem; block-size: 1.1rem; transition: rotate .9s cubic-bezier(.34, 1.56, .64, 1); }
+/* Mini avatar: a round crop of the head and shoulders */
+.to-top-head {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 0 0 1.5px var(--control-border);
+  transition: translate .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+.to-top-head img { inline-size: 100%; block-size: auto; translate: 0 4%; }
 
 @media (hover: hover) {
   .footer-name:hover { color: var(--accent); }
   .to-top:hover { color: var(--fg); }
-  .to-top:hover .mark { rotate: -1turn; }
+  .to-top:hover .to-top-head { translate: 0 -4px; }
 }
 
 @media (max-width: 40rem) {
@@ -790,6 +800,67 @@ main:focus { outline: none; }
 @media (max-width: 56rem) {
   .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
   .seedhead { --d: min(10rem, 34vw); order: -1; justify-self: center; }
+}
+
+/* =================== Contact: the avatar peeks in from the edge =================== */
+.contact {
+  --peek-h: clamp(20rem, 38vw, 32rem);     /* full avatar height; only the top third shows */
+  --lean: -58deg;                          /* leaning in from the right (LTR) */
+}
+[dir="rtl"] .contact { --lean: 58deg; }
+/* Zero-size anchor (his feet), placed off-screen beyond the inline-end edge */
+.peek {
+  position: absolute;
+  inset-block-start: 58%;
+  inset-inline-end: calc(var(--peek-h) * -.55);
+  inline-size: 0;
+  block-size: 0;
+  pointer-events: none;
+}
+.peek img {
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--peek-h) / -5.88);      /* centre the figure on the anchor (width = height / 2.94) */
+  inline-size: calc(var(--peek-h) / 2.94);
+  max-inline-size: none;
+  rotate: var(--lean);
+  transform-origin: 50% 100%;
+  transition: rotate 1.1s cubic-bezier(.34, 1.3, .64, 1) .2s;
+  filter: drop-shadow(0 .75rem 1rem rgb(61 44 48 / .2));
+}
+/* Before the section is reached he stays tucked behind the edge */
+.alpine .contact:not(.is-in) .peek img { rotate: calc(var(--lean) * .4); transition-delay: 0s; }
+/* A little idle sway once he's in */
+.contact.is-in .peek img { animation: sway 5s ease-in-out 1.4s infinite; }
+@keyframes sway { 50% { rotate: calc(var(--lean) + 4deg); } }
+[dir="rtl"] .contact.is-in .peek img { animation-name: sway-rtl; }
+@keyframes sway-rtl { 50% { rotate: calc(var(--lean) - 4deg); } }
+
+/* Speech bubble next to his head */
+.peek-bubble {
+  position: absolute;
+  inset-block-start: calc(58% - var(--peek-h) * .62);
+  inset-inline-end: calc(var(--peek-h) * .34);
+  padding: .5rem 1rem;
+  background: var(--bg);
+  border: 2px solid var(--ink-line);
+  border-radius: 1.1rem 1.1rem .25rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, .9rem + .5vw, 1.35rem);
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 .5rem 1rem -.5rem rgb(61 44 48 / .3);
+  transform-origin: 100% 100%;
+  transition: scale .5s cubic-bezier(.34, 1.56, .64, 1) 1.1s, opacity .3s ease 1.1s;
+}
+[dir="rtl"] .peek-bubble { border-radius: 1.1rem 1.1rem 1.1rem .25rem; transform-origin: 0 100%; }
+.alpine .contact:not(.is-in) .peek-bubble { scale: 0; opacity: 0; transition-delay: 0s; }
+
+@media (max-width: 40rem) {
+  /* On phones he peeks in down by the sunrise, clear of the contact rows */
+  .contact { --peek-h: 17rem; }
+  .peek { inset-block-start: auto; inset-block-end: 0; }
+  .peek-bubble { inset-block-start: auto; inset-block-end: calc(var(--peek-h) * .55); }
 }
 
 /* Hover effects only where a real pointer can hover (avoids "stuck" hover after a tap) */
