@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" dir="ltr"
+      x-data="{ theme: $persist(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light').as('theme'), active: '' }"
+      :data-theme="theme">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Huthaifah Alammari — Content Creator · Voice-over Artist · Creative Writer</title>
+  <meta name="description" content="Huthaifah Alammari — Content Creator · Voice-over Artist · Creative Writer.">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Link previews (WhatsApp, LinkedIn, X…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Huthaifah Alammari">
+  <meta property="og:description" content="Content Creator · Voice-over Artist · Creative Writer">
+
+  <!-- Fill in once the domain is known
+  <link rel="canonical" href="https://example.com/en/">
+  <link rel="alternate" hreflang="ar" href="https://example.com/">
+  <link rel="alternate" hreflang="en" href="https://example.com/en/">
+  <link rel="alternate" hreflang="x-default" href="https://example.com/">
+  <meta property="og:url" content="https://example.com/en/">
+  <meta property="og:image" content="https://example.com/og.jpg">
+  -->
+
+  <!-- Apply saved theme before first paint (Alpine loads deferred, too late to prevent a flash) -->
+  <script>
+    (() => {
+      let theme;
+      try { theme = JSON.parse(localStorage.getItem('theme')) } catch {}
+      document.documentElement.dataset.theme = theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- Plugins must load before Alpine core -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.17.4/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.17.4/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.17.4/dist/cdn.min.js"></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <a class="brand" href="#hero">Huthaifah Alammari</a>
+
+      <nav class="nav" aria-label="Primary">
+        <ul>
+          <li><a href="#about" :aria-current="active === 'about' && 'location'">About</a></li>
+          <li><a href="#experience" :aria-current="active === 'experience' && 'location'">Experience</a></li>
+          <li><a href="#projects" :aria-current="active === 'projects' && 'location'">Projects</a></li>
+          <li><a href="#writing" :aria-current="active === 'writing' && 'location'">Writing Samples</a></li>
+          <li><a href="#skills" :aria-current="active === 'skills' && 'location'">Skills</a></li>
+          <li><a href="#contact" :aria-current="active === 'contact' && 'location'">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="actions">
+        <a class="btn" href="../" hreflang="ar" lang="ar">عربي</a>
+
+        <button type="button" class="btn" x-cloak
+                @click="theme = theme === 'dark' ? 'light' : 'dark'"
+                :aria-pressed="theme === 'dark'">
+          <span aria-hidden="true" x-text="theme === 'dark' ? '☀' : '☾'"></span>
+          <span class="sr-only">Dark mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="hero" class="hero" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-text">
+          <p class="eyebrow">Content Creator · Voice-over Artist · Creative Writer</p>
+          <h1 id="hero-title">
+            Huthaifah Alammari
+            <span class="hero-alt" lang="ar">حذيفة العماري</span>
+          </h1>
+          <p class="hero-desc">A content creator specialized in storytelling. I combine in-depth research, creative writing, and professional voice performance to turn ideas into stories that inspire and resonate.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="https://drive.google.com/drive/folders/1adrf3SVzUqDVwgOwex_jtM6HRGi3OKk7" target="_blank" rel="noopener">Portfolio</a>
+            <a class="btn-secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+        <img class="hero-flower" src="../assets/sunflower.png" alt="" width="620" height="620" fetchpriority="high">
+      </div>
+      <div class="scroll-hint" aria-hidden="true">Explore<span></span></div>
+    </section>
+
+    <section id="about" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="about-title">
+      <div class="container"><h2 id="about-title">About</h2></div>
+    </section>
+
+    <section id="experience" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="experience-title">
+      <div class="container"><h2 id="experience-title">Experience</h2></div>
+    </section>
+
+    <section id="projects" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="projects-title">
+      <div class="container"><h2 id="projects-title">Projects</h2></div>
+    </section>
+
+    <section id="writing" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="writing-title">
+      <div class="container"><h2 id="writing-title">Writing Samples</h2></div>
+    </section>
+
+    <section id="skills" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="skills-title">
+      <div class="container"><h2 id="skills-title">Skills</h2></div>
+    </section>
+
+    <section id="contact" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="contact-title">
+      <div class="container"><h2 id="contact-title">Contact</h2></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container"><small>© <span x-text="new Date().getFullYear()"></span> Huthaifah Alammari</small></div>
+  </footer>
+</body>
+</html>
