@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,600&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="../style.css">
 
+  <script defer src="../assets/site.js"></script>
   <!-- Plugins must load before Alpine core -->
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.17.4/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.17.4/dist/cdn.min.js"></script>
@@ -73,8 +74,8 @@
         <ul>
           <li><a href="#about" :aria-current="active === 'about' && 'location'">About</a></li>
           <li><a href="#experience" :aria-current="active === 'experience' && 'location'">Experience</a></li>
-          <li><a href="#projects" :aria-current="active === 'projects' && 'location'">Projects</a></li>
-          <li><a href="#writing" :aria-current="active === 'writing' && 'location'">Writing Samples</a></li>
+          <li><a href="#featured" :aria-current="active === 'featured' && 'location'">Featured Work</a></li>
+          <li><a href="#library" :aria-current="active === 'library' && 'location'">All Work</a></li>
           <li><a href="#skills" :aria-current="active === 'skills' && 'location'">Skills</a></li>
           <li><a href="#contact" :aria-current="active === 'contact' && 'location'">Contact</a></li>
         </ul>
@@ -263,12 +264,303 @@
       </div>
     </section>
 
-    <section id="projects" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="projects-title">
-      <div class="container"><h2 id="projects-title">Projects</h2></div>
+    <section id="featured" class="section journey" x-data="{ ch: 0, inJourney: false }"
+             x-intersect.margin.-50%.0px="active = $el.id" x-intersect:enter="inJourney = true" x-intersect:leave="inJourney = false"
+             aria-labelledby="featured-title">
+      <!-- The sun crosses the sky as you travel through the chapters -->
+      <div class="journey-sky" aria-hidden="true"><span class="sun"></span></div>
+
+      <div class="container">
+        <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
+          <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+          <p class="eyebrow">Featured Work</p>
+          <h2 id="featured-title">A Journey in Three Chapters</h2>
+          <svg class="scribble" viewBox="0 0 200 14" aria-hidden="true"><path pathLength="1" d="M3 9 C40 3 80 12 120 6 S188 4 197 8"/></svg>
+        </header>
+      </div>
+
+      <nav class="rail" :class="{ 'is-on': inJourney }" aria-label="Journey chapters">
+        <ol><li><a href="#ch-1" :class="{ 'is-active': ch === 1 }" :aria-current="ch === 1 && 'step'"><span class="rail-bud"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="rail-num">I</span><span class="sr-only">Chapter one</span></a></li><li><a href="#ch-2" :class="{ 'is-active': ch === 2 }" :aria-current="ch === 2 && 'step'"><span class="rail-bud"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="rail-num">II</span><span class="sr-only">Chapter two</span></a></li><li><a href="#ch-3" :class="{ 'is-active': ch === 3 }" :aria-current="ch === 3 && 'step'"><span class="rail-bud"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="rail-num">III</span><span class="sr-only">Chapter three</span></a></li></ol>
+      </nav>
+
+      <!-- Chapter I: watch -->
+      <article id="ch-1" class="chapter" x-intersect.margin.-50%.0px="ch = 1" aria-labelledby="ch-1-title">
+        <div class="stage">
+          <span class="ch-num" aria-hidden="true">I</span>
+          <div class="container ch-grid">
+            <div class="ch-text reveal" x-intersect.once="$el.classList.add('is-in')">
+              <p class="eyebrow"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg>Chapter I · Documentary</p>
+              <h3 id="ch-1-title" class="ch-title">The Story of Al-Jidar Al-Qibli</h3>
+              <ul class="ch-roles"><li>Script</li><li>Voice-over</li><li>Translation</li></ul>
+              <p class="ch-desc">Script, voice-over and translation for the documentary, in Arabic and English. A historical record that tells a deeply human story through professional visual and vocal craft.</p>
+              <p class="ch-line"><span style="--w: 0">Where</span> <span style="--w: 1">silence,</span> <span style="--w: 2">in</span> <span style="--w: 3">the</span> <span style="--w: 4">sanctuary</span> <span style="--w: 5">of</span> <span style="--w: 6">beauty,</span> <span style="--w: 7">is</span> <span style="--w: 8">beauty.</span></p>
+              <a class="ch-next link" href="#watch">Watch all video work</a>
+            </div>
+            <div class="ch-media">
+              <a class="screen" href="https://youtu.be/qHcPo9jOXzw" target="_blank" rel="noopener"
+                 @click.prevent="$dispatch('open-video', 'qHcPo9jOXzw')" aria-label="Play the documentary: The Story of Al-Jidar Al-Qibli">
+                <img src="https://i.ytimg.com/vi/qHcPo9jOXzw/maxresdefault.jpg" alt="" width="1280" height="720" loading="lazy">
+                <span class="screen-play" aria-hidden="true"><svg class="screen-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Chapter II: read -->
+      <article id="ch-2" class="chapter" x-intersect.margin.-50%.0px="ch = 2" aria-labelledby="ch-2-title">
+        <div class="stage">
+          <span class="ch-num" aria-hidden="true">II</span>
+          <div class="container ch-grid ch-grid--flip">
+            <div class="ch-text reveal" x-intersect.once="$el.classList.add('is-in')">
+              <p class="eyebrow"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg>Chapter II · Annual Report</p>
+              <h3 id="ch-2-title" class="ch-title">Saudi Reef 2023</h3>
+              <ul class="ch-roles"><li>Creative Writing</li><li>Annual Report</li><li>Storytelling</li></ul>
+              <p class="ch-desc">Writing and editing the creative content of the Saudi Reef program’s annual report, turning achievements and figures into success stories in a professional voice.</p>
+              <p class="ch-links"><a class="link" href="https://online.fliphtml5.com/wmllz/ydli/#p=38" target="_blank" rel="noopener">Browse the report</a> <a class="ch-next link" href="#read">Read the writing samples</a></p>
+            </div>
+            <div class="ch-media">
+              <div class="book" aria-hidden="true">
+                <div class="book-page"><p>“Turning achievements and figures into success stories”</p><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+                <div class="book-cover">
+                  <span class="book-kicker">Annual Report 2023</span>
+                  <span class="book-title">Saudi Reef</span>
+                  <svg class="mark book-mark"><use href="#sunflower"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Chapter III: listen -->
+      <article id="ch-3" class="chapter" x-intersect.margin.-50%.0px="ch = 3" aria-labelledby="ch-3-title">
+        <div class="stage">
+          <span class="ch-num" aria-hidden="true">III</span>
+          <div class="container ch-grid">
+            <div class="ch-text reveal" x-intersect.once="$el.classList.add('is-in')">
+              <p class="eyebrow"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg>Chapter III · Voice-over</p>
+              <h3 id="ch-3-title" class="ch-title">A Voice That Carries the Story</h3>
+              <ul class="ch-roles"><li>Ads</li><li>Articles</li><li>Poetry</li><li>Documentaries</li></ul>
+              <p class="ch-desc">40+ voice projects across ads, articles and documentaries. Spin the record and listen.</p>
+              <a class="ch-next link" href="#listen">Listen to every recording</a>
+            </div>
+            <div class="ch-media">
+              <div class="record" x-data="track" :class="{ 'is-playing': playing }" :style="`--p: ${progress}`">
+                <div class="record-disc" aria-hidden="true"><img src="../assets/sunflower.svg" alt="" width="2630" height="2630" loading="lazy"></div>
+                <button type="button" class="record-btn" @click="toggle()" :aria-pressed="playing" aria-label="Play: Epic ad">
+                  <span aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <p class="record-meta">Epic — ad · <span x-text="time">0:00</span> / 0:44</p>
+                <audio x-ref="audio" src="../assets/audio/ad-epic.mp3" preload="none" controls></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
     </section>
 
-    <section id="writing" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="writing-title">
-      <div class="container"><h2 id="writing-title">Writing Samples</h2></div>
+    <section id="library" class="section library" x-data="library" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="library-title">
+      <span class="bg-word" aria-hidden="true">Library</span>
+      <div class="container">
+        <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
+          <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+          <p class="eyebrow">All Work</p>
+          <h2 id="library-title">Many Pens, One Voice</h2>
+          <svg class="scribble" viewBox="0 0 200 14" aria-hidden="true"><path pathLength="1" d="M3 9 C40 3 80 12 120 6 S188 4 197 8"/></svg>
+        </header>
+
+        <div class="doors reveal" style="--d: 1" x-intersect.once="$el.classList.add('is-in')">
+          <button id="door-watch" type="button" class="door" @click="toggle('watch')" :aria-expanded="door === 'watch'" aria-controls="watch"
+                  :class="{ 'is-open': door === 'watch', 'is-dim': door && door !== 'watch' }">
+            <svg class="door-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            <span class="door-count">13</span>
+            <span class="door-label">Watch</span>
+            <span class="door-desc">Ads, documentaries & platform content</span>
+          </button>
+          <button id="door-listen" type="button" class="door" @click="toggle('listen')" :aria-expanded="door === 'listen'" aria-controls="listen"
+                  :class="{ 'is-open': door === 'listen', 'is-dim': door && door !== 'listen' }">
+            <svg class="door-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h2M7 8v8M11 4v16M15 7v10M19 10v4M21 12h0"/></svg>
+            <span class="door-count">7</span>
+            <span class="door-label">Listen</span>
+            <span class="door-desc">Ads, poetry & narrated articles</span>
+          </button>
+          <button id="door-read" type="button" class="door" @click="toggle('read')" :aria-expanded="door === 'read'" aria-controls="read"
+                  :class="{ 'is-open': door === 'read', 'is-dim': door && door !== 'read' }">
+            <svg class="door-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg>
+            <span class="door-count">5</span>
+            <span class="door-label">Read</span>
+            <span class="door-desc">Marketing, script, poetry & prose</span>
+          </button>
+        </div>
+
+        <!-- Watch -->
+        <div id="watch" x-ref="watch" class="door-panel" :class="{ 'is-open': door === 'watch' }" role="region" aria-labelledby="door-watch">
+          <ul class="vids">
+            <!-- Video 1: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 01</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 2: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 02</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 3: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 03</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 4: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 04</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 5: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 05</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 6: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 06</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 7: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 07</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 8: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 08</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 9: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 09</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 10: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 10</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 11: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 11</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 12: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 12</span><span class="vid-type">Coming soon</span></span></li>
+            <!-- Video 13: when ready, replace this <li> with
+                 <li><a class="vid" href="https://youtu.be/ID" @click.prevent="$dispatch('open-video', 'ID')"><img class="vid-thumb" src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="vid-title">TITLE</span><span class="vid-type">TYPE</span></a></li> -->
+            <li><span class="vid is-soon"><span class="vid-thumb" aria-hidden="true"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></span><span class="vid-title">Video 13</span><span class="vid-type">Coming soon</span></span></li>
+          </ul>
+        </div>
+
+        <!-- Listen -->
+        <div id="listen" x-ref="listen" class="door-panel" :class="{ 'is-open': door === 'listen' }" role="region" aria-labelledby="door-listen">
+            <h3 class="trk-group">Ads</h3>
+            <ul class="tracks">
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: Epic">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">Epic</span><span class="trk-type">Ad</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 0:44</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: Epic" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/ad-epic.mp3" preload="none" controls></audio>
+              </li>
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: Jami’ al-Kutub al-Tis’a">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">Jami’ al-Kutub al-Tis’a</span><span class="trk-type">Ad</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 1:07</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: Jami’ al-Kutub al-Tis’a" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/ad-jami-kutub.mp3" preload="none" controls></audio>
+              </li>
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: Nahhal">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">Nahhal</span><span class="trk-type">Ad</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 0:30</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: Nahhal" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/ad-nahhal.mp3" preload="none" controls></audio>
+              </li>
+            </ul>
+            <h3 class="trk-group">Poetry</h3>
+            <ul class="tracks">
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: Ata’a ‘Adhilahu — al-Buhturi">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">Ata’a ‘Adhilahu — al-Buhturi</span><span class="trk-type">Poem</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 2:00</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: Ata’a ‘Adhilahu — al-Buhturi" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/poem-buhturi.mp3" preload="none" controls></audio>
+              </li>
+            </ul>
+            <h3 class="trk-group">Articles</h3>
+            <ul class="tracks">
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: The Discipline of the Seeker — Sulaiman Al-Aboudi">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">The Discipline of the Seeker — Sulaiman Al-Aboudi</span><span class="trk-type">Article</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 2:27</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: The Discipline of the Seeker — Sulaiman Al-Aboudi" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/article-discipline.mp3" preload="none" controls></audio>
+              </li>
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: The Need for Protestantism">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">The Need for Protestantism</span><span class="trk-type">Article</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 12:31</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: The Need for Protestantism" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/article-protestantism.mp3" preload="none" controls></audio>
+              </li>
+              <li class="trk" x-data="track" :class="{ 'is-playing': playing }">
+                <button type="button" class="trk-play" @click="toggle()" :aria-pressed="playing" aria-label="Play: Taming Melancholy — Abdullah Al-Wuhaibi">
+                  <svg class="mark trk-mark" aria-hidden="true"><use href="#sunflower"/></svg>
+                  <span class="trk-icon" aria-hidden="true" x-text="playing ? '❚❚' : '▶'">▶</span>
+                </button>
+                <span class="trk-info"><span class="trk-title">Taming Melancholy — Abdullah Al-Wuhaibi</span><span class="trk-type">Article</span></span>
+                <span class="trk-time" dir="ltr"><span x-text="time">0:00</span> / 19:45</span>
+                <input class="trk-bar" type="range" min="0" max="1000" step="1" :value="progress * 1000" @input="seek($event)" aria-label="Playback position: Taming Melancholy — Abdullah Al-Wuhaibi" x-cloak>
+                <audio x-ref="audio" src="../assets/audio/article-melancholy.mp3" preload="none" controls></audio>
+              </li>
+            </ul>
+        </div>
+
+        <!-- Read -->
+        <div id="read" x-ref="read" class="door-panel" :class="{ 'is-open': door === 'read' }" role="region" aria-labelledby="door-read">
+          <div x-data="{ f: 'all' }">
+          <div class="pills" role="group" aria-label="Filter writing samples" x-cloak><button type="button" class="pill" @click="f = 'all'" :aria-pressed="f === 'all'">All</button><button type="button" class="pill" @click="f = 'marketing'" :aria-pressed="f === 'marketing'">Marketing</button><button type="button" class="pill" @click="f = 'documentary'" :aria-pressed="f === 'documentary'">Documentary script</button><button type="button" class="pill" @click="f = 'poetry'" :aria-pressed="f === 'poetry'">Poetry</button><button type="button" class="pill" @click="f = 'prose'" :aria-pressed="f === 'prose'">Creative prose</button></div>
+          <div class="sheets">
+            <article class="sheet" x-data="{ more: false }" :class="{ 'is-more': more }" x-show="f === 'all' || f === 'marketing'">
+              <p class="sheet-type">Marketing · Agriculture<span class="sheet-orig">Original Arabic</span></p>
+              <h3 class="sheet-title">The Coffee Sector</h3>
+              <div class="sheet-text" lang="ar" dir="rtl"><p>بدأت صناعة البن والقهوة تزدهر شيئًا فشيئًا حتى بات من الضروري استثمارها؛ من هنا انطلق البرنامج، المتمثل في قطاع البن والقهوة، في سعيه الحثيث لإبراز هذا القطاع، ورفع نسبة الاكتفاء الذاتي وتقليل الواردات، ليكون قطاعًا فارقًا في عملية تنمية الاقتصاد واستثمار الطاقات.</p></div>
+            </article>
+            <article class="sheet" x-data="{ more: false }" :class="{ 'is-more': more }" x-show="f === 'all' || f === 'poetry'">
+              <p class="sheet-type">Classical poetry · Devotional<span class="sheet-orig">Original Arabic</span></p>
+              <h3 class="sheet-title">Before the Green Dome</h3>
+              <div class="sheet-text" lang="ar" dir="rtl"><div class="poem"><p class="bayt"><span>تجلّت تلكم الخضراء حسنًا</span><span>فخير الخلق ثَمَّ هنا دفينا</span></p><p class="bayt"><span>محمد سيد الكونين خُلْقًا</span><span>رسولُ الله خير المرسلينا</span></p><p class="bayt"><span>مَشُوقًا نحوه دمعي تهاوى</span><span>يبلل وجنةً ذابت حنينًا</span></p><p class="bayt"><span>أُصَلي قرب حجرته وحولي</span><span>أماكنُ قد وطى طـٰه يقينا</span></p><p class="bayt"><span>سجدت قد اقشعرَّ لذاك قلبي</span><span>أحقًا من هنا قد مرَّ حينا؟!</span></p><p class="bayt"><span>رجعت وما لدي من اشتياقٍ</span><span>يزيد بكل خُطْواتي، حزينا</span></p><p class="bayt"><span>إلهي فاجمعن قلبي بـطـٰه</span><span>بيومٍ قلتَ سيروا آمنينا</span></p></div></div>
+            </article>
+            <article class="sheet is-long" x-data="{ more: false }" :class="{ 'is-more': more }" x-show="f === 'all' || f === 'documentary'">
+              <p class="sheet-type">Documentary script · Islamic heritage<span class="sheet-orig">Original Arabic</span></p>
+              <h3 class="sheet-title">The Story of Al-Jidar Al-Qibli | The Eternal Scene</h3>
+              <div class="sheet-text" lang="ar" dir="rtl"><p>أصعب ما يمكن فقدانه هو الشعور بالجمال؛ لأن الإنسان يتنفس بالفن، وطمس فنّه بمثابة كتم أنفاسه. والفن منذ الأزل مقياس الحضارة الأبرز، وليس تخلَّد حضارة في ذاكرة التاريخ إلّا بفنونها، ويعد الجدار القبلي الواجهة الفنية الأبرز بالمسجد النبوي الشريف.</p><p>في عام ٨٨١ هـ أمر السلطان قايتباي بعمارة شاملة للمسجد النبوي.. وبعدها بخمس سنوات في منتصف رمضان نشبَ حريق هائل؛ ضربت صاعقة كبرى المآذن مات على إثرها رئيس المؤذنين، واندلعت النيران التهمت خزائن الكتب والنفائس وجزءًا كبيرًا من سقف المسجد.</p><p>أمر بعدها السلطان قايتباي بعمارة شاملة، المئات من البنّائين والنجارين والنحاتين والحدادين، زادوا في الجانب الشرقي اثني عشر مترًا، وبنى القبة الخضراء بدلًا عن الزرقاء التي كانت قبل الحريق.</p><p>واختير خط الثلث الأخاذ ليزين الجدار بحروف مذهبة، رصّعت بالآيات القرآنية وأسماء النبي الكريم بالقرب من مثواه — شاهداً على أجمل وأتقن فنون الخط والترخيم.</p><p>ومنذ ذلك الوقت بات خُمْس سكّان الكرة الأرضية يتوجهون خمس مرات يومياً صوب القبلة، يتسابقون للصفوف الأولى تحيط بهم الروضة وأمامهم مشهد أبدي من الجمال الذي يعانق الجلال.</p><p>وبذلك يقف المتأمل مشدوهاً أمام المشهد الأبدي — حيث الصمت في حرم الجمال جمال.</p></div>
+                <button type="button" class="sheet-more" x-cloak @click="more = !more" :aria-expanded="more" x-text="more ? 'Show less' : 'Read more'">Read more</button>
+            </article>
+            <article class="sheet is-long" x-data="{ more: false }" :class="{ 'is-more': more }" x-show="f === 'all' || f === 'prose'">
+              <p class="sheet-type">Creative prose · Impressions<span class="sheet-orig">Original Arabic</span></p>
+              <h3 class="sheet-title">On Madinah</h3>
+              <div class="sheet-text" lang="ar" dir="rtl"><p>قال لي صديق: أحكِ لي عن المدينة، فحرّك طلبه شجني فقلت له: بصراحة ليس عندي ما أحكيه عن المدينة تحديدًا، لكن كل ما سأقول عنها أنها ديار بديعة، تستشعر السكينة في كل خطوة تخطوها بها.</p><p>تغمرك السكينة وتستشعر أنك في ذروة السعادة حين تكون في المسجد النبوي، حين تدنو من قبر رسول الله ﷺ فتفيض دموعك شوقًا وحنينًا، أو حين تمشي في الروضة فتستشعر أنك في بقعة من الجنة.</p><p>تستشعر أن في هذا المسجد كان لحسّان منبر يصدح فيه بالشعر ورسول الله يؤيده ويقول له أن روح القدس معه. وفي كل زاوية في المدينة ذكرى وعبق من شوق وحنين، وحبر قلبي لا يكفي ليعبر عن حبي للمدينة.</p></div>
+                <button type="button" class="sheet-more" x-cloak @click="more = !more" :aria-expanded="more" x-text="more ? 'Show less' : 'Read more'">Read more</button>
+            </article>
+            <article class="sheet is-long" x-data="{ more: false }" :class="{ 'is-more': more }" x-show="f === 'all' || f === 'prose'">
+              <p class="sheet-type">Reflective prose · Spiritual<span class="sheet-orig">Original Arabic</span></p>
+              <h3 class="sheet-title">In Ramadan</h3>
+              <div class="sheet-text" lang="ar" dir="rtl"><p>أتعرف شعور الإنهاك؟ ذلك الذي ينتابك من شدّة لهَثِكَ خلف مطالب الحياة، حين تنغمس في حالة من التطلُّبِ تُنسيك حتَّى نفسك.</p><p>ماذا لو بعد كلِّ ذلك الشقاء والتعب يأتيك من حيث لم تحتسب أنواعٌ من رزقٍ كنت تسعى له، وراحة نفسية وسلام لا نظير لهما؟ كيف لا وقد أدركت رمضان! أدركت موسم الراحة، ومحطة التزوّد.</p><p>حين تعتزل الخلق لتنفرد بالخالق، بين دعائك وسجداتك وتلاوتك يكمن السلام النفسي. رمضان موسم تُسقى فيه من ظمأ العام؛ فلا تجعله يمر عليك ولم ترتوي، وكل عامٍ وأنت بخير.</p></div>
+                <button type="button" class="sheet-more" x-cloak @click="more = !more" :aria-expanded="more" x-text="more ? 'Show less' : 'Read more'">Read more</button>
+            </article>
+          </div>
+          </div>
+        </div>
+
+        <p class="archive"><a class="link" href="https://drive.google.com/drive/folders/1adrf3SVzUqDVwgOwex_jtM6HRGi3OKk7" target="_blank" rel="noopener">Full archive</a></p>
+      </div>
     </section>
 
     <section id="skills" class="section skills" x-intersect.margin.-50%.0px="active = $el.id" x-intersect.once="$el.classList.add('is-in')" aria-labelledby="skills-title">
@@ -381,5 +673,10 @@
       <a class="to-top" href="#hero"><span class="to-top-head" aria-hidden="true"><img src="../assets/avatar.svg" alt="" width="1516" height="4452" loading="lazy"></span>Back to top</a>
     </div>
   </footer>
+  <!-- Video lightbox (shared by the documentary and the Watch grid) -->
+  <dialog class="lightbox" x-data="lightbox" @open-video.window="open($event.detail)" @close="src = ''" @click.self="$el.close()">
+    <button type="button" class="lightbox-close btn" @click="$root.close()">Close ✕</button>
+    <template x-if="src"><iframe :src="src" title="YouTube" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></template>
+  </dialog>
 </body>
 </html>
