@@ -622,7 +622,7 @@ main:focus { outline: none; }
 }
 
 /* =================== Contact: "sunrise finale" =================== */
-.contact { --sun-size: clamp(18rem, 42vw, 34rem); position: relative; overflow: clip; padding-block-end: calc(var(--sun-size) * .5 + 4rem); }
+.contact { --sun-size: clamp(18rem, 42vw, 34rem); position: relative; overflow: clip; padding-block-end: max(calc(var(--sun-size) * .5 + 4rem), calc(var(--peek-h) * .75)); }
 .contact .container { position: relative; z-index: 1; }
 .contact .sec-head h2 { font-size: clamp(2.75rem, 7vw, 6rem); line-height: 1.15; }
 .contact-sub { margin-block-start: 1.25rem; max-inline-size: 38rem; color: var(--muted); font-size: clamp(1.0625rem, 1rem + .3vw, 1.25rem); }
@@ -804,14 +804,15 @@ main:focus { outline: none; }
 
 /* =================== Contact: the avatar peeks in from the edge =================== */
 .contact {
-  --peek-h: clamp(20rem, 38vw, 32rem);     /* full avatar height; only the top third shows */
+  --peek-h: clamp(18rem, 30vw, 26rem);     /* full avatar height; only the top third shows */
   --lean: -58deg;                          /* leaning in from the right (LTR) */
 }
 [dir="rtl"] .contact { --lean: 58deg; }
 /* Zero-size anchor (his feet), placed off-screen beyond the inline-end edge */
+/* Anchored at the bottom of the section, where there's never any text to cover */
 .peek {
   position: absolute;
-  inset-block-start: 58%;
+  inset-block-end: 0;
   inset-inline-end: calc(var(--peek-h) * -.55);
   inline-size: 0;
   block-size: 0;
@@ -839,7 +840,7 @@ main:focus { outline: none; }
 /* Speech bubble next to his head */
 .peek-bubble {
   position: absolute;
-  inset-block-start: calc(58% - var(--peek-h) * .62);
+  inset-block-end: calc(var(--peek-h) * .56);
   inset-inline-end: calc(var(--peek-h) * .34);
   padding: .5rem 1rem;
   background: var(--bg);
@@ -857,10 +858,12 @@ main:focus { outline: none; }
 .alpine .contact:not(.is-in) .peek-bubble { scale: 0; opacity: 0; transition-delay: 0s; }
 
 @media (max-width: 40rem) {
-  /* On phones he peeks in down by the sunrise, clear of the contact rows */
   .contact { --peek-h: 17rem; }
-  .peek { inset-block-start: auto; inset-block-end: 0; }
-  .peek-bubble { inset-block-start: auto; inset-block-end: calc(var(--peek-h) * .55); }
+}
+/* Tablets and phones: the half-sunk sunrise would only show petal tips, so it steps aside */
+@media (max-width: 56rem) {
+  .sunrise { display: none; }
+  .contact { padding-block-end: calc(var(--peek-h) * .75); }
 }
 
 /* Hover effects only where a real pointer can hover (avoids "stuck" hover after a tap) */
