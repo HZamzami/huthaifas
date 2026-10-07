@@ -217,9 +217,9 @@ main:focus { outline: none; }
 .hero-flower {
   justify-self: center;
   inline-size: min(26rem, 100%, 55vh);
-  animation: rise 1.2s ease .3s both, spin 90s linear infinite;
+  animation: rise 1.2s ease .3s both, spin 60s linear infinite;
 }
-@keyframes spin { to { rotate: 1turn; } }
+@keyframes spin { to { transform: rotate(1turn); } } /* transform: works on older phones too */
 
 .scroll-hint {
   display: grid;
