@@ -602,7 +602,7 @@ main:focus { outline: none; }
   inset-inline-start: .2rem;
 }
 /* Shared petal shape: bullets and footer separators */
-.petals li::before, .footer-links li + li::before {
+.petals li::before, .footer-links li + li::before, .skill-words li + li::before {
   inline-size: .55rem;
   block-size: .55rem;
   background: var(--sun);
@@ -709,6 +709,87 @@ main:focus { outline: none; }
   .cta-arrow { grid-column: 3; grid-row: 1 / span 2; }
   .cta-row { grid-template-columns: 1fr; }
   .copy-btn { justify-self: start; margin: 0 .5rem 1.25rem; }
+}
+
+/* =================== Skills: "the seed head" =================== */
+.skills { --section-bg: var(--surface); position: relative; overflow: clip; }
+.skills .container { position: relative; }
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+  margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* Skill groups: flowing type with petal separators */
+.skill-group { padding-block: 1.5rem; }
+.skill-group + .skill-group { border-block-start: 1px dashed var(--control-border); }
+.skill-title { display: flex; align-items: center; gap: .6rem; color: var(--accent); font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem); }
+.seed-key { inline-size: .75rem; block-size: .75rem; border-radius: 50%; background: var(--g); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sun) 45%, transparent); }
+.skill-count { font-family: var(--font-body); font-size: .8rem; font-weight: 600; color: var(--muted); }
+.skill-words {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-block-start: .75rem;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1rem + 1.2vw, 1.9rem);
+  line-height: 1.6;
+}
+.skill-words li + li::before { content: ""; display: inline-block; margin-inline: .75rem; vertical-align: middle; }
+.skill-words span {
+  background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 88% / 0 .42em;
+  transition: background-size .5s cubic-bezier(.65, 0, .35, 1);
+}
+[dir="rtl"] .skill-words span { background-position-x: 100%; }
+
+/* Seed colours per group (also used by the legend dots) */
+[data-g="1"], .seed.g1 { --g: #4f5e1f; }
+[data-g="2"], .seed.g2 { --g: #3b2629; }
+[data-g="3"], .seed.g3 { --g: #e3a53b; }
+
+/* The seed head */
+.seedhead {
+  --d: min(17rem, 22vw);              /* the seed disc; petals extend beyond it */
+  position: relative;
+  inline-size: var(--d);
+  aspect-ratio: 1;
+  margin: calc(var(--d) * .345);
+  animation: spin 120s linear infinite;
+}
+.seedhead-petals { position: absolute; left: -34.5%; top: -34.5%; inline-size: 169%; block-size: 169%; max-inline-size: none; filter: drop-shadow(0 1rem 1.5rem rgb(61 44 48 / .18)); }
+.seedhead-disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #6f802e 0 28%, #8d5b28 55%, #ac692d 78%);
+  box-shadow: 0 0 0 2px var(--ink-line), inset 0 0 1.5rem rgb(0 0 0 / .25);
+}
+.seed {
+  position: absolute;
+  inline-size: calc(2.3% + var(--i) * .008%);   /* outer seeds a little bigger, like a real head */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: var(--g);
+  transition: scale .5s cubic-bezier(.34, 1.56, .64, 1) calc(var(--i) * 6ms), opacity .3s, background-color .3s;
+}
+/* Seeds spiral out from the centre when the section appears */
+.alpine .skills:not(.is-in) .seed { scale: 0; }
+/* Hovering a group lights up its seeds */
+.seedhead[data-focus] .seed { opacity: .25; }
+.seedhead[data-focus="1"] .seed.g1, .seedhead[data-focus="2"] .seed.g2, .seedhead[data-focus="3"] .seed.g3 { opacity: 1; background: var(--sun); scale: 1.5; }
+
+@media (hover: hover) {
+  .skill-words span:hover { background-size: 100% .42em; }
+}
+
+@media (max-width: 56rem) {
+  .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .seedhead { --d: min(10rem, 34vw); order: -1; justify-self: center; }
 }
 
 /* Hover effects only where a real pointer can hover (avoids "stuck" hover after a tap) */

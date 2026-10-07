@@ -270,8 +270,58 @@
       <div class="container"><h2 id="writing-title">نماذج كتابية</h2></div>
     </section>
 
-    <section id="skills" class="section" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="skills-title">
-      <div class="container"><h2 id="skills-title">المهارات</h2></div>
+    <section id="skills" class="section skills" x-intersect.margin.-50%.0px="active = $el.id" x-intersect.once="$el.classList.add('is-in')" aria-labelledby="skills-title">
+      <span class="bg-word" aria-hidden="true">بذور</span>
+      <div class="container">
+        <header class="sec-head reveal" x-intersect.once="$el.classList.add('is-in')">
+          <div class="ornament" aria-hidden="true" :class="{ 'is-spinning': active === $el.closest('section').id }"><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg><svg class="mark" aria-hidden="true"><use href="#sunflower"/></svg></div>
+          <p class="eyebrow">الكفاءات</p>
+          <h2 id="skills-title">المهارات</h2>
+          <svg class="scribble" viewBox="0 0 200 14" aria-hidden="true"><path pathLength="1" d="M3 9 C40 3 80 12 120 6 S188 4 197 8"/></svg>
+        </header>
+
+        <div class="skills-grid" x-data="{ focus: null, seeds: Array.from({ length: 170 }, (_, i) => { const a = i * 2.39996, r = Math.sqrt(i + 1) / Math.sqrt(171) * 46; return { x: 50 + r * Math.cos(a), y: 50 + r * Math.sin(a), i, g: i % 3 + 1 } }) }">
+          <div class="skill-list reveal" style="--d: 1" x-intersect.once="$el.classList.add('is-in')">
+            <div class="skill-group" data-g="1" @mouseenter="focus = 1" @mouseleave="focus = null">
+              <h3 class="skill-title"><span class="seed-key" aria-hidden="true"></span>الكتابة والبحث<span class="skill-count" aria-hidden="true">05</span></h3>
+              <ul class="skill-words">
+                <li><span>سرد قصصي</span></li>
+                <li><span>تقارير سنوية</span></li>
+                <li><span>كتابة السيناريو</span></li>
+                <li><span>تدقيق لغوي وتحرير</span></li>
+                <li><span>بحث استقصائي</span></li>
+              </ul>
+            </div>
+            <div class="skill-group" data-g="2" @mouseenter="focus = 2" @mouseleave="focus = null">
+              <h3 class="skill-title"><span class="seed-key" aria-hidden="true"></span>الإنتاج والتقنية<span class="skill-count" aria-hidden="true">06</span></h3>
+              <ul class="skill-words">
+                <li><span>تعليق صوتي (<span lang="en">VO</span>)</span></li>
+                <li><span>تعديل صوتي</span></li>
+                <li><span>إنتاج البودكاست</span></li>
+                <li><span>ترجمة إبداعية</span></li>
+                <li><span>أدب وشعر</span></li>
+                <li><span><span lang="en">Google Workspace</span></span></li>
+              </ul>
+            </div>
+            <div class="skill-group" data-g="3" @mouseenter="focus = 3" @mouseleave="focus = null">
+              <h3 class="skill-title"><span class="seed-key" aria-hidden="true"></span>الشهادات<span class="skill-count" aria-hidden="true">03</span></h3>
+              <ul class="skill-words">
+                <li><span><span lang="en">IELTS 6.5</span></span></li>
+                <li><span>تطبيقات جوجل — مسارات القمة</span></li>
+                <li><span>مهارات التدوين — التدريب التقني</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sunflower seed head: seeds placed on the golden-angle spiral -->
+          <div class="seedhead" aria-hidden="true" :data-focus="focus">
+            <svg class="seedhead-petals"><use href="#sunflower"/></svg>
+            <div class="seedhead-disc">
+              <template x-for="s in seeds" :key="s.i"><i class="seed" :class="'g' + s.g" :style="`left:${s.x}%;top:${s.y}%;--i:${s.i}`"></i></template>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="contact" class="section contact" x-intersect.margin.-50%.0px="active = $el.id" aria-labelledby="contact-title">
