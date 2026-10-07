@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="ar" dir="rtl"
-      x-data="{ theme: $persist(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light').as('theme'), active: '' }"
+      x-data="{ theme: $persist(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light').as('theme'), active: '', open: false }"
       :data-theme="theme">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>حذيفة العماري — صانع محتوى · معلق صوتي · كاتب إبداعي</title>
   <meta name="description" content="حذيفة العماري — صانع محتوى · معلق صوتي · كاتب إبداعي.">
   <meta name="color-scheme" content="light dark">
+  <!-- Browser bar colour (Safari / Chrome on Android), kept in sync with the theme -->
+  <meta name="theme-color" content="#fbf7ef" :content="theme === 'dark' ? '#1c1613' : '#fbf7ef'">
 
   <!-- Link previews (WhatsApp, LinkedIn, X…) -->
   <meta property="og:type" content="website">
@@ -26,9 +28,12 @@
   <!-- Apply saved theme before first paint (Alpine loads deferred, too late to prevent a flash) -->
   <script>
     (() => {
+      document.documentElement.classList.add('js');
       let theme;
       try { theme = JSON.parse(localStorage.getItem('theme')) } catch {}
-      document.documentElement.dataset.theme = theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      theme = theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name=theme-color]').content = theme === 'dark' ? '#1c1613' : '#fbf7ef';
     })();
   </script>
 
@@ -46,11 +51,15 @@
 <body>
   <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
 
-  <header class="header">
+  <header class="header"
+          @click.outside="open = false"
+          @keydown.escape.window="if (open) { open = false; $refs.menuBtn.focus() }">
     <div class="container">
       <a class="brand" href="#hero">حذيفة العماري</a>
 
-      <nav class="nav" aria-label="الرئيسية">
+      <nav id="site-nav" class="nav" :class="{ 'is-open': open }"
+           @click="$event.target.closest('a') && (open = false)"
+           aria-label="الرئيسية">
         <ul>
           <li><a href="#about" :aria-current="active === 'about' && 'location'">نبذة</a></li>
           <li><a href="#experience" :aria-current="active === 'experience' && 'location'">الخبرات</a></li>
@@ -69,6 +78,12 @@
                 :aria-pressed="theme === 'dark'">
           <span aria-hidden="true" x-text="theme === 'dark' ? '☀' : '☾'"></span>
           <span class="sr-only">الوضع الداكن</span>
+        </button>
+
+        <button type="button" class="btn menu-btn" x-ref="menuBtn" x-cloak
+                @click="open = !open" :aria-expanded="open" aria-controls="site-nav"
+                aria-label="القائمة">
+          <span></span><span></span><span></span>
         </button>
       </div>
     </div>
