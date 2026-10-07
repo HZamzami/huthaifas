@@ -863,7 +863,9 @@ main:focus { outline: none; }
 /* Tablets and phones: the half-sunk sunrise would only show petal tips, so it steps aside */
 @media (max-width: 56rem) {
   .sunrise { display: none; }
-  .contact { padding-block-end: calc(var(--peek-h) * .75); }
+  .contact { padding-block-end: calc(var(--peek-h) * .75 + 1rem); }
+  /* Bubble sits beside his head rather than above it, leaving air below the contact rows */
+  .peek-bubble { inset-block-end: calc(var(--peek-h) * .47); }
 }
 
 /* Hover effects only where a real pointer can hover (avoids "stuck" hover after a tap) */
