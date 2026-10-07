@@ -9,7 +9,7 @@
   <meta name="description" content="حذيفة العماري — صانع محتوى · معلق صوتي · كاتب إبداعي.">
   <meta name="color-scheme" content="light dark">
   <!-- Browser bar colour (Safari / Chrome on Android), kept in sync with the theme -->
-  <meta name="theme-color" content="#fbf7ef" :content="theme === 'dark' ? '#1c1613' : '#fbf7ef'">
+  <meta name="theme-color" content="#fbf7ef" :content="theme === 'dark' ? '#2a231e' : '#fbf7ef'">
 
   <!-- Link previews (WhatsApp, LinkedIn, X…) -->
   <meta property="og:type" content="website">
@@ -33,7 +33,7 @@
       try { theme = JSON.parse(localStorage.getItem('theme')) } catch {}
       theme = theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.dataset.theme = theme;
-      document.querySelector('meta[name=theme-color]').content = theme === 'dark' ? '#1c1613' : '#fbf7ef';
+      document.querySelector('meta[name=theme-color]').content = theme === 'dark' ? '#2a231e' : '#fbf7ef';
     })();
   </script>
 

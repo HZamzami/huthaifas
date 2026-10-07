@@ -13,7 +13,8 @@ p { text-wrap: pretty; }
 :root {
   --header-h: 4rem;
   /* Side gutter that also clears the iPhone notch / rounded corners in landscape */
-  --gutter: max(1rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  --gutter: max(clamp(1.25rem, 5vw, 5rem), env(safe-area-inset-left), env(safe-area-inset-right));
+  --content-max: 76rem;
   --font-body: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-display: "Amiri", serif;
 
@@ -30,12 +31,12 @@ p { text-wrap: pretty; }
 }
 
 [data-theme="dark"] {
-  --bg: #1c1613;
+  --bg: #2a231e;
   --fg: #f3ead9;
-  --muted: #b9aa95;
-  --surface: #251d18;
-  --border: #3a2e27;
-  --control-border: #66554a;
+  --muted: #c9baa5;
+  --surface: #332a24;
+  --border: #4a3e35;
+  --control-border: #6f6054;
   --accent: var(--sun);
   color-scheme: dark;
 }
@@ -93,7 +94,7 @@ main:focus { outline: none; }
 
 /* ---------- Layout ---------- */
 .container {
-  inline-size: min(100% - 2 * var(--gutter), 80rem);
+  inline-size: min(100% - 2 * var(--gutter), var(--content-max));
   margin-inline: auto;
 }
 
@@ -174,7 +175,7 @@ main:focus { outline: none; }
 
 .hero h1 {
   margin-block-start: 1.5rem;
-  font-size: clamp(2.75rem, 6vw + 1rem, 6.5rem);
+  font-size: clamp(2.75rem, min(6vw, 9vh) + 1rem, 6rem); /* shrinks on short laptop screens too */
   line-height: 1.05;
 }
 .hero-alt {
@@ -193,6 +194,7 @@ main:focus { outline: none; }
   margin-block-start: 1.75rem;
   max-inline-size: 32rem;
   color: var(--muted);
+  font-size: clamp(1rem, .95rem + .25vw, 1.125rem);
   line-height: 1.9;
 }
 
@@ -214,7 +216,7 @@ main:focus { outline: none; }
 /* Sunflower: companion to the name, slowly turning */
 .hero-flower {
   justify-self: center;
-  inline-size: min(26rem, 100%);
+  inline-size: min(26rem, 100%, 55vh);
   animation: rise 1.2s ease .3s both, spin 90s linear infinite;
 }
 @keyframes spin { to { rotate: 1turn; } }
@@ -284,9 +286,9 @@ main:focus { outline: none; }
 .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .menu-btn[aria-expanded="true"] span:nth-child(3) { translate: 0 -6px; rotate: -45deg; }
 
-/* ---------- Tablet & phone ---------- */
-@media (max-width: 56rem) {
-  /* Header: burger menu (only when JS is on; otherwise the nav stays a plain list) */
+/* ---------- Below 70rem: burger menu (the full nav no longer fits beside name + buttons) ---------- */
+@media (max-width: 70rem) {
+  /* Only when JS is on; otherwise the nav stays a plain list */
   .actions { margin-inline-start: auto; }
   .js .menu-btn { display: grid; }
   .js .nav {
@@ -303,17 +305,19 @@ main:focus { outline: none; }
   .js .nav ul {
     flex-direction: column;
     gap: 0;
-    inline-size: min(100% - 2 * var(--gutter), 80rem);
+    inline-size: min(100% - 2 * var(--gutter), var(--content-max));
     margin-inline: auto;
     padding-block: .5rem 1rem;
   }
   .js .nav a { display: block; padding-block: .75rem; font-size: 1.125rem; }
   .js .nav li + li { border-block-start: 1px solid var(--border); }
+}
 
-  /* Hero: stacked, centred, compact */
+/* ---------- Tablet & phone: stacked, centred, compact hero ---------- */
+@media (max-width: 56rem) {
   .hero { padding-block: 1.5rem 2.5rem; }
   .hero .container { grid-template-columns: 1fr; align-content: center; text-align: center; gap: 1.5rem; }
-  .hero-flower { order: -1; inline-size: clamp(9rem, 36vw, 13rem); }
+  .hero-flower { order: -1; inline-size: clamp(9rem, 36vw, 16rem); }
   .eyebrow { justify-content: center; }
   .eyebrow::before { display: none; }
   .hero h1 { margin-block-start: 1rem; }
@@ -323,3 +327,11 @@ main:focus { outline: none; }
   .scroll-hint { display: none; }
 }
 @keyframes drop { from { opacity: 0; translate: 0 -.5rem; } }
+
+/* ---------- Tiny phones (≤ 360px): keep the header on one line ---------- */
+@media (max-width: 22.5rem) {
+  .header .container { gap: .75rem; }
+  .brand { font-size: .9375rem; }
+  .actions { gap: .375rem; }
+  .btn { padding-inline: .5rem; }
+}
