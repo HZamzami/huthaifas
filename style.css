@@ -268,6 +268,7 @@ main:focus { outline: none; }
   animation: pulse 2.2s ease-in-out infinite;
 }
 @keyframes pulse { 50% { opacity: .3; scale: 1 .8; } }
+@keyframes bob { 50% { opacity: .4; translate: 0 .5rem; } }
 
 /* Staggered entrance; elements stay visible if animations are off */
 .hero-text > * { animation: rise .9s ease both; }
@@ -456,6 +457,9 @@ main:focus { outline: none; }
 .link:focus-visible { text-decoration-color: currentColor; }
 .link[target="_blank"]::after { content: " ↗" / ""; font-weight: 400; }
 [dir="rtl"] .link[target="_blank"]:not([dir="ltr"])::after { content: " ↖" / ""; }
+/* LTR text (phone, handles) inside Arabic: same ↖, on the same (left) side */
+[dir="rtl"] .link[target="_blank"][dir="ltr"]::after { content: none; }
+[dir="rtl"] .link[target="_blank"][dir="ltr"]::before { content: "↖ " / ""; font-weight: 400; }
 .icon {
   inline-size: 1.25rem;
   block-size: 1.25rem;
@@ -617,6 +621,7 @@ main:focus { outline: none; }
 
 @media (max-width: 56rem) {
   .stem { --stem-pad: 2.5rem; --line-x: .75rem; }
+  .petals li:lang(ar) { text-align: justify; } /* narrow Arabic columns read better as a full block */
 }
 
 /* =================== Contact: "sunrise finale" =================== */
@@ -1371,7 +1376,7 @@ a.archive-btn {
 
 /* ---------- Tablet & phone: stacked, centred, compact hero ---------- */
 @media (max-width: 56rem) {
-  .hero { padding-block: 1.5rem 2.5rem; }
+  .hero { padding-block: 1.5rem 1rem; }
   .hero .container { grid-template-columns: 1fr; align-content: center; text-align: center; gap: 1.5rem; }
   .hero-art { order: -1; inline-size: clamp(9rem, 36vw, 16rem); }
   .eyebrow { justify-content: center; }
@@ -1379,7 +1384,8 @@ a.archive-btn {
   .hero-desc { margin: 1.25rem auto 0; }
   .hero-actions { margin: 1.75rem auto 0; max-inline-size: 22rem; }
   .hero-actions > * { flex: 1; justify-content: center; }
-  .scroll-hint { display: none; }
+  .hero-actions > .btn-primary { flex-basis: 100%; } /* main action on its own row, the other two below */
+  .scroll-hint span { block-size: 2rem; animation: bob 1.8s ease-in-out infinite; }
 }
 @keyframes drop { from { opacity: 0; translate: 0 -.5rem; } }
 
